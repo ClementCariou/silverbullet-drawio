@@ -64,7 +64,6 @@ async function drawIoEdit(diagramPath: string): Promise<void> {
 
 export async function editDrawioDiagram() {
   const pageName = await editor.getCurrentPage();
-  const directory = pageName.substring(0, pageName.lastIndexOf("/"));
   const text = await editor.getText();
   let matches = getDiagrams(text);
 
@@ -77,7 +76,7 @@ export async function editDrawioDiagram() {
     return;
   }
   if (matches.length === 1) {
-    diagramPath = directory + "/" + matches[0];
+    diagramPath = matches[0];
   } else {
     const options = matches.map((model) => ({
       name: model,
@@ -88,7 +87,7 @@ export async function editDrawioDiagram() {
       await editor.flashNotification("No diagram selected!", "error");
       return;
     }
-    diagramPath = directory + "/" + selectedDiagram.name;
+    diagramPath = selectedDiagram.name;
   }
 
   await drawIoEdit(diagramPath);
@@ -212,7 +211,7 @@ url:${filePath}
 }
 
 async function insertAttachment(from: number, to: number, name: string, filePath: string): Promise<void> {
-  const link = `![${name}](${name})`;
+  const link = `![${name}](${filePath})`;
   await editor.replaceRange(from, to, link);
   await drawIoEdit(filePath);
 }
@@ -270,7 +269,7 @@ export function snippetSlashComplete(): SlashCompletions {
       {
         label: "drawio",
         detail: "Create new Drawio diagram",
-        invoke: "drawio.createDiagramAsWidget",
+        invoke: "drawio.createDiagramAsAttachment",
       },
     ],
   };
