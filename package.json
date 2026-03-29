@@ -1,0 +1,12 @@
+{
+  "name": "silverbullet-plug-template",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "npx plug-compile drawio.plug.yaml"
+  },
+  "dependencies": {
+    "@silverbulletmd/silverbullet": "^2.5.3",
+    "handlebars": "^4.7.9"
+  }
+}
