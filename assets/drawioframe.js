@@ -171,6 +171,7 @@ async function receive(evt) {
                     }),
                     "*"
                 );
+				return;
             }
             // Notify save is done
             iframe?.contentWindow?.postMessage(
