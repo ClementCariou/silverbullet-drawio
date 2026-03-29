@@ -6,6 +6,7 @@ on:
       - 'README.md'
 
 jobs:
+  workflow_dispatch:
   publish:
     runs-on: ubuntu-latest
     steps:
